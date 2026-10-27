@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderly - Travel Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f5ef;
+            color: #17231f;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1160px;
+            margin: auto;
+        }
+
+        /* Navbar */
+        header {
+            background: #f7f5ef;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #234b3b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a:hover {
+            color: #678a4b;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #234b3b;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #35684f;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 75px 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .tagline {
+            color: #678a4b;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 6vw, 76px);
+            line-height: 1.05;
+            margin: 20px 0;
+            letter-spacing: -2px;
+        }
+
+        h1 span {
+            color: #678a4b;
+        }
+
+        .hero p {
+            color: #66736c;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 20px 45px #234b3b25;
+        }
+
+        /* Statistics */
+        .stats {
+            background: #234b3b;
+            color: white;
+            padding: 30px 0;
+        }
+
+        .stats-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+
+        .stats h2 {
+            font-size: 30px;
+        }
+
+        .stats p {
+            color: #c7d7cc;
+        }
+
+        /* Destinations */
+        section {
+            padding: 75px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-top: 10px;
+        }
+
+        .section-heading p {
+            color: #66736c;
+            margin-top: 12px;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px #00000008;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 22px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #66736c;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card small {
+            color: #678a4b;
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about {
+            background: #eeeee5;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        .about h2 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+
+        .about p {
+            color: #66736c;
+        }
+
+        .feature {
+            margin-top: 22px;
+        }
+
+        .feature h3 {
+            margin-bottom: 5px;
+        }
+
+        /* Newsletter */
+        .newsletter-box {
+            background: #d8f36a;
+            padding: 45px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .newsletter-box h2 {
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .newsletter-box p {
+            margin-top: 10px;
+            color: #46523c;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 7px;
+            border-radius: 30px;
+        }
+
+        .newsletter-form input {
+            width: 190px;
+            border: none;
+            outline: none;
+            padding: 10px;
+            background: transparent;
+        }
+
+        /* Footer */
+        footer {
+            background: #172c23;
+            color: white;
+            padding: 28px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        footer p {
+            color: #c7d2ca;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .destination-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .newsletter-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .nav {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                font-size: 13px;
+            }
+
+            .nav .btn {
+                display: none;
+            }
+
+            .hero {
+                padding: 45px 0;
+            }
+
+            .hero-image {
+                height: 300px;
+            }
+
+            .destination-grid,
+            .stats-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2,
+            .about h2 {
+                font-size: 34px;
+            }
+
+            .newsletter-box {
+                padding: 25px;
+            }
+
+            .newsletter-form {
+                width: 100%;
+                flex-direction: column;
+                border-radius: 15px;
+            }
+
+            .newsletter-form input {
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">✦ Wanderly</a>
+
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <a href="#destinations" class="btn">Explore Places ↗</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-content">
+                <div>
+                    <span class="tagline">Your next chapter starts here</span>
+
+                    <h1>
+                        Less scrolling.<br>
+                        More <span>wonder.</span>
+                    </h1>
+
+                    <p>
+                        Discover beautiful destinations, unforgettable
+                        experiences, and places that turn your travels
+                        into amazing memories.
+                    </p>
+
+                    <a href="#destinations" class="btn">
+                        Find Your Escape ↗
+                    </a>
+                </div>
+
+                <div>
+                    <img
+                        class="hero-image"
+                        src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+                        alt="Beautiful lake surrounded by mountains">
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="container stats-content">
+                <div>
+                    <h2>120+</h2>
+                    <p>Handpicked Destinations</p>
+                </div>
+
+                <div>
+                    <h2>35 Countries</h2>
+                    <p>Places to Explore</p>
+                </div>
+
+                <div>
+                    <h2>4.9/5</h2>
+                    <p>Traveller Rating</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Destinations Section -->
+        <section id="destinations">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="tagline">Explore the world</span>
+                    <h2>Somewhere wonderful<br>is waiting.</h2>
+                    <p>
+                        Choose your next adventure from our favourite
+                        travel destinations.
+                    </p>
+                </div>
+
+                <div class="destination-grid">
+
+                    <article class="card">
+                        <img
+                            src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80"
+                            alt="Colourful Italian coastal village">
+
+                        <div class="card-content">
+                            <h3>Cinque Terre, Italy</h3>
+                            <p>
+                                Colourful villages, beautiful coastlines,
+                                and delicious Italian food.
+                            </p>
+                            <small>☀ Best time: May–September</small>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img
+                            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
+                            alt="Snow-covered mountain peaks">
+
+                        <div class="card-content">
+                            <h3>Swiss Alps, Switzerland</h3>
+                            <p>
+                                Mountain views, peaceful trails,
+                                and refreshing alpine air.
+                            </p>
+                            <small>❄ Best time: June–September</small>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img
+                            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+                            alt="Beautiful green landscape">
+
+                        <div class="card-content">
+                            <h3>Bali, Indonesia</h3>
+                            <p>
+                                Green landscapes, tropical beaches,
+                                and unforgettable sunsets.
+                            </p>
+                            <small>🌿 Best time: April–October</small>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container about-content">
+
+                <div>
+                    <img
+                        class="about-image"
+                        src="https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1000&q=85"
+                        alt="Peaceful mountain scenery">
+                </div>
+
+                <div>
+                    <span class="tagline">Travel your way</span>
+
+                    <h2>Good trips feel like you.</h2>
+
+                    <p>
+                        The best journeys are not just about visiting
+                        places. They are about discovering new cultures,
+                        meeting people, and creating memories.
+                    </p>
+
+                    <div class="feature">
+                        <h3>🧭 Thoughtfully Picked</h3>
+                        <p>Discover destinations worth experiencing.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🌿 Relax and Explore</h3>
+                        <p>Enjoy a slower pace and meaningful adventures.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>✨ Made for Everyone</h3>
+                        <p>Find inspiration for weekend trips or longer holidays.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="contact">
+            <div class="container">
+                <div class="newsletter-box">
+                    <div>
+                        <h2>A little wanderlust<br>in your inbox.</h2>
+                        <p>
+                            Get travel ideas and inspiration delivered
+                            straight to you.
+                        </p>
+                    </div>
+
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Your email address"
+                            aria-label="Your email address"
+                            required>
+
+                        <button class="btn" type="submit">
+                            Subscribe ↗
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <a href="#home" class="logo" style="color:white">
+                ✦ Wanderly
+            </a>
+
+            <p>© 2026 Wanderly. Made for the curious.</p>
+
+            <p>Explore. Discover. Repeat.</p>
+        </div>
+    </footer>
+
+    <script>
+        const newsletterForm =
+            document.getElementById("newsletterForm");
+
+        newsletterForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            alert("Thank you for subscribing, " + email + "!");
+
+            newsletterForm.reset();
+        });
+    </script>
+
+</body>
+</html>
